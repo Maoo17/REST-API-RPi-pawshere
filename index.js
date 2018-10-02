@@ -12,8 +12,11 @@ var port = 8000;
 // Use the variable to create a server.
 // The server executes the function for each request it receives.
 http.createServer(function (req, res) {
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    res.end("Hello World\n");
+    fs.readFile('index.html',function (err, data){
+        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+        res.write(data);
+        res.end();
+    });
 }).listen(port, ip);
 
 console.log("Server running at " + ip + ":" + port);
