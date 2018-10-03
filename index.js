@@ -4,19 +4,42 @@
  */
 "use strict";
 
-// Get the module for http and store it in a variable
-var http = require("http");
+const port    = 8000;
+const path    = require("path");
+const express = require("express");
+const app     = express();
+const routeIndex = require("./route/index.js");
+const middleware = require("./middleware/index.js");
 
-var ip = "127.0.0.1";
-var port = 8000;
-// Use the variable to create a server.
-// The server executes the function for each request it receives.
-http.createServer(function (req, res) {
-    fs.readFile('index.html',function (err, data){
-        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
-        res.write(data);
-        res.end();
+app.set("view engine", "ejs");
+
+app.use(middleware.logIncomingToConsole);
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/", routeIndex);
+app.listen(port, logStartUpDetailsToConsole);
+
+
+
+function logStartUpDetailsToConsole() {
+    let routes = [];
+
+    // Find what routes are supported
+    app._router.stack.forEach((middleware) => {
+        if (middleware.route) {
+            // Routes registered directly on the app
+            routes.push(middleware.route);
+        } else if (middleware.name === "router") {
+            // Routes added as router middleware
+            middleware.handle.stack.forEach((handler) => {
+                let route;
+
+                route = handler.route;
+                route && routes.push(route);
+            });
+        }
     });
-}).listen(port, ip);
 
-console.log("Server running at " + ip + ":" + port);
+    console.info(`Server is listening on port ${port}.`);
+    // console.info("Available routes are:");
+    // console.info(routes);
+}

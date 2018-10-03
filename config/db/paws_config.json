@@ -1,0 +1,7 @@
+{
+    "host":     "localhost",
+    "user":     "hush",
+    "password": "secret",
+    "database": "paws",
+    "multipleStatements": true
+}

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="sv">
+    <head>
+        <meta charset="utf-8">
+        <title>API</title>
+        <link rel="stylesheet" href="style/style.css">
+        <link rel="icon" href="img/pawshere.ico">
+    </head>
+    <body>
+        <header class="header">
+            <div class="flex-row">
+                <img class="pawspicture" src="img/pawshere.png" alt="pawshere">
+                <h2 class="header-title">API PawsHere</h2>
+            </div>
+        </header>
+        <div class="flex-row">
+            <nav>
+                <div class="vertical-menu">
+                    <a href="#intro">How to use</a>
+                    <a href="#api-key">API-keys</a>
+                    <a href="#get">Get</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                    <a href="#">Link 4</a>
+                </div>
+            </nav>
+            <div class="article">
+                <h1>API Documentation</h1>
+                <article id="intro" class="article">
+                    How to use
+                    <div class="codefield">
+                        <!-- <code>.vertical-menu a:hover {
+                            color: rgb(19, 176, 223);
+                        }</code> -->
+                    </div>
+                </article>
+                <article id="api-key" class="article">
+                    <h1>API-keys</h1>
+                    <h3>Verify API-key</h3>
+                    <div class="routefield">
+                        <code>GET /verify_key?key=[API_KEY]</code>
+                    </div>
+                    <h4>Result</h4>
+                    <div class="codefield">
+                        <code>"key exist as verified."</code>
+                    </div>
+                </article>
+                <article id="get" class="article">
+                    <h1>Cats</h1>
+                    <h3>GET all cats</h3>
+                    <div class="routefield">GET /cats?=[API_KEY]</div>
+                    <h4>Result</h4>
+                    <pre class="codefield">
+{
+  "data": [
+    {
+      "tag_id": 12,
+      "name": "Tiger",
+      "home_group": "home 2",
+      "is_chipped": "no",
+      "owner": "Lars Persson",
+      "home": "Dragongatan 3B, 379 40 Karlskrona",
+      "gps": "56.164115,15.585870"
+    },
+    {
+      "tag_id": 15,
+      "name": "Luna",
+      "home_group": "Almas katter",
+      "is_chipped": "yes",
+      "owner": "Alma Holm",
+      "home": "Drottninggatan 57, 335 80 Karlskrona",
+      "gps": "56.164450, 15.567168"
+    },
+    {
+      "tag_id": 20,
+      "name": "Nugget",
+      "home_group": "Almas katter",
+      "is_chipped": "yes",
+      "owner": "Alma Holm",
+      "home": "Drottninggatan 57, 335 80 Karlskrona",
+      "gps": "52.163470, 11.547190"
+    },
+    {
+      "tag_id": 56,
+      "name": "Maja",
+      "home_group": "hemlÃ¶sa",
+      "is_chipped": "yes",
+      "owner": "Katthemmet",
+      "home": "RingvÃ¤gen 8, 378 90 MalmÃ¶",
+      "gps": "55.162460, 18.547241"
+    }
+  ]
+}</pre>
+                    <h3>GET specific cat</h3>
+                    <div class="routefield">GET /cat/:tag_id?api_key=[API_KEY]</div>
+                    <h4>Result</h4>
+                    <pre class="codefield">
+{
+  "data": [
+    {
+      "tag_id": 12,
+      "name": "Tiger",
+      "home_group": "home 2",
+      "is_chipped": "no",
+      "owner": "Lars Persson",
+      "home": "Dragongatan 3B, 379 40 Karlskrona",
+      "gps": "56.164115,15.585870"
+    }
+  ]
+}
+                    </pre>
+                </article>
+            </div>
+        </div>
+
+
+    </body>
+    <script type="text/javascript" src="js/main.js"></script>
+</html>
