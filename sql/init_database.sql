@@ -1,16 +1,16 @@
 use paws;
 
-DROP TABLE api_users;
-CREATE TABLE IF NOT EXISTS api_users (
+DROP TABLE  IF EXISTS api_users;
+CREATE TABLE api_users (
     id INT AUTO_INCREMENT,
     api_key VARCHAR(255) NOT NULL,
     email VARCHAR(255),
-    password VRCHAR(255),
+    password VARCHAR(255),
     PRIMARY KEY (id)
 );
 
-DROP TABLE cat_profiles;
-CREATE TABLE IF NOT EXISTS cat_profiles (
+DROP TABLE IF EXISTS cat_profiles;
+CREATE TABLE cat_profiles (
     tag_id INT,
     name VARCHAR(255),
     home_group VARCHAR(255),
