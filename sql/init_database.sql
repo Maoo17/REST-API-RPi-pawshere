@@ -1,5 +1,6 @@
 use paws;
 
+DROP TABLE api_users;
 CREATE TABLE IF NOT EXISTS api_users (
     id INT AUTO_INCREMENT,
     api_key VARCHAR(255) NOT NULL,
@@ -8,6 +9,7 @@ CREATE TABLE IF NOT EXISTS api_users (
     PRIMARY KEY (id)
 );
 
+DROP TABLE cat_profiles;
 CREATE TABLE IF NOT EXISTS cat_profiles (
     tag_id INT,
     name VARCHAR(255),
