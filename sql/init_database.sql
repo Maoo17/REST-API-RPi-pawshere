@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS api_users (
     id INT AUTO_INCREMENT,
     api_key VARCHAR(255) NOT NULL,
     email VARCHAR(255),
+    password VRCHAR(255),
     PRIMARY KEY (id)
 );
 

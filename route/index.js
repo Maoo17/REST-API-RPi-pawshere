@@ -75,4 +75,29 @@ router.get("/cat/:tag_id", async (req, res) => {
     res.end();
 });
 
+router.post("/cats", async (req, res) => {
+    let id = req.body.tag_id;
+    let name = req.body.name;
+    let hg = req.body.home_group;
+    let chip = req.body.is_chipped;
+    let owner = req.body.owner;
+    let home = req.body.home;
+    let gps = req.body.gps;
+
+
+    let result = await paws.checkForKey(key);
+
+    if (typeof key == 'undefined') {
+        res.write("Wrong type of argument in query.");
+    } else {
+        if (result === true) {
+            await paws.registerCat(id, name, hg, chip, owner, home, gps);
+            res.json({message: "cat registered successfully"});
+        } else {
+            res.write("does not exist.");
+        }
+    }
+    res.end();
+});
+
 module.exports = router;

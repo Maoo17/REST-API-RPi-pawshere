@@ -3,7 +3,8 @@
 module.exports = {
     checkForKey: checkForKey,
     getAllCats: getAllCats,
-    getSpecificCat: getSpecificCat
+    getSpecificCat: getSpecificCat,
+    registerCat: registerCat
 };
 
 const mysql  = require("promise-mysql");
@@ -46,4 +47,12 @@ async function getSpecificCat(tag) {
     res = await db.query(sql, [tag]);
 
     return res;
+}
+
+async function registerCat(id, name, hg, chip, owner, home, gps) {
+    let sql = `INSERT INTO cat_profiles(tag_id, name, home_group, is_chipped, owner, home, gps)
+               VALUES
+               (?, ?, ?, ?, ?, ?, ?);
+               `;
+    await db.query(sql, [id, name, hg, chip, owner, home, gps]);
 }
