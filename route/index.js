@@ -84,6 +84,7 @@ router.post("/cats", async (req, res) => {
     let home = req.body.home;
     let gps = req.body.gps;
 
+    console.log(id);
 
     let result = await paws.checkForKey(key);
 
