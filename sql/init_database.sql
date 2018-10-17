@@ -29,6 +29,7 @@ CREATE TABLE cat_profiles (
     owner VARCHAR(255),
     home VARCHAR(255),
     gps VARCHAR(255),
+    img VARCHAR(255),
     PRIMARY KEY (tag_id),
     FOREIGN KEY (owner_id) REFERENCES app_users(id)
 );

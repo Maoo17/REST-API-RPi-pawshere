@@ -75,10 +75,9 @@ router.get("/cat/:tag_id", async (req, res) => {
 });
 
 router.post("/cats", async (req, res) => {
-    console.log(req);
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    console.log(req);
+
     let id = req.body.tag_id;
     let oi = req.body.owner_id;
     let name = req.body.name;
