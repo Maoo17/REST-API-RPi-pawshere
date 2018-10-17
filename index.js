@@ -11,6 +11,7 @@ const app     = express();
 const routeIndex = require("./route/index.js");
 const middleware = require("./middleware/index.js");
 const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -18,7 +19,8 @@ app.use(function(req, res, next) {
     next();
 });
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(middleware.logIncomingToConsole);
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", routeIndex);
