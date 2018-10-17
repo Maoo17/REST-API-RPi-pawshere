@@ -84,6 +84,10 @@ router.post("/cats", async (req, res) => {
     let home = req.body.home;
     let gps = null;
 
+    console.log(id);
+    console.log(oi);
+    console.log(name);
+
     let key = req.query.api_key;
     let result = await paws.checkForDuplicateId(id);
 

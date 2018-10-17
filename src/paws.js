@@ -56,15 +56,7 @@ async function getSpecificCat(tag) {
 }
 //klart
 async function registerCat(id, oi, name, hg, chip, owner, home, gps) {
-    let sql = `INSERT INTO cat_profiles(tag_id, name, home_group, is_chipped, owner, home, gps)
-               VALUES
-               (?, ?, ?, ?, ?, ?, ?);
-               `;
-    await db.query(sql, [id, name, hg, chip, owner, home, gps]);
-}
-//klart
-async function registerCat(id, name, hg, chip, owner, home, gps) {
-    let sql = `INSERT INTO cat_profiles(tag_id, name, home_group, is_chipped, owner, home, gps)
+    let sql = `INSERT INTO cat_profiles(tag_id, owner_id, name, home_group, is_chipped, owner, home, gps)
                VALUES
                (?, ?, ?, ?, ?, ?, ?, ?);
                `;
