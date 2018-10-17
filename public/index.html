@@ -18,10 +18,9 @@
                 <div class="vertical-menu">
                     <a href="#intro">How to use</a>
                     <a href="#api-key">API-keys</a>
-                    <a href="#get">Get</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                    <a href="#">Link 4</a>
+                    <a href="#cats">Cats</a>
+                    <a href="#users">Users</a>
+                    <a href="#login">Login</a>
                 </div>
             </nav>
             <div class="article">
@@ -46,7 +45,7 @@
 }</pre></code>
                     </div>
                 </article>
-                <article id="get" class="article">
+                <article id="cats" class="article">
                     <h1>Cats</h1>
                     <h3>GET all cats</h3>
                     <div class="routefield">GET /cats?=[API_KEY]</div>
@@ -141,6 +140,7 @@ tag_id
         "message": "Entry does not exists."
     }
 }                    </pre>
+                    <article id="users" class="article">
                     <h1>Users</h1>
                     <h3>Register user</h3>
                     <div class="routefield">POST  /users?api_key=[API_KEY]</div>
@@ -155,6 +155,8 @@ password
                     <pre class="codefield">
 id
                     </pre>
+                    </article>
+                    <article id="login" class="article">
                     <h1>Login</h1>
                     <h3>Check Login</h3>
                     <div class="routefield">POST  /login?api_key=[API_KEY]</div>
