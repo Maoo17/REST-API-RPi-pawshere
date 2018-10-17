@@ -11,7 +11,6 @@ const app     = express();
 const routeIndex = require("./route/index.js");
 const middleware = require("./middleware/index.js");
 const bodyParser = require('body-parser');
-var bodyParser = require('body-parser');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
