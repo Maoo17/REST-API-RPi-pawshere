@@ -4,7 +4,12 @@ module.exports = {
     checkForKey: checkForKey,
     getAllCats: getAllCats,
     getSpecificCat: getSpecificCat,
-    registerCat: registerCat
+    registerCat: registerCat,
+    checkForDuplicateId: checkForDuplicateId,
+    deleteCat: deleteCat,
+    registerUser: registerUser,
+    login: login,
+    deleteUser: deleteUser
 };
 
 const mysql  = require("promise-mysql");
@@ -22,7 +27,7 @@ let db;
 })();
 
 
-
+//klart
 async function checkForKey(key) {
     let sql = `SELECT * FROM api_users WHERE api_key = ?;`;
     let res = false;
@@ -33,6 +38,7 @@ async function checkForKey(key) {
     }
     return res;
 }
+//klart
 async function getAllCats() {
     let sql = `SELECT * FROM cat_profiles;`;
     let res;
@@ -40,7 +46,7 @@ async function getAllCats() {
 
     return res;
 }
-
+//klart
 async function getSpecificCat(tag) {
     let sql = `SELECT * FROM cat_profiles WHERE tag_id = ?;`;
     let res;
@@ -48,11 +54,62 @@ async function getSpecificCat(tag) {
 
     return res;
 }
-
-async function registerCat(id, name, hg, chip, owner, home, gps) {
+//klart
+async function registerCat(id, oi, name, hg, chip, owner, home, gps) {
     let sql = `INSERT INTO cat_profiles(tag_id, name, home_group, is_chipped, owner, home, gps)
                VALUES
                (?, ?, ?, ?, ?, ?, ?);
                `;
     await db.query(sql, [id, name, hg, chip, owner, home, gps]);
+}
+//klart
+async function registerCat(id, name, hg, chip, owner, home, gps) {
+    let sql = `INSERT INTO cat_profiles(tag_id, name, home_group, is_chipped, owner, home, gps)
+               VALUES
+               (?, ?, ?, ?, ?, ?, ?, ?);
+               `;
+    await db.query(sql, [id, oi, name, hg, chip, owner, home, gps]);
+}
+//klart
+async function checkForDuplicateId(id) {
+    let exists = false;
+    let sql = `SELECT * FROM cat_profiles WHERE tag_id = ?`;
+    let res = await db.query(sql, [id]);
+
+    if (res.length !== 0) {
+        exists = true;
+    }
+    return exists;
+}
+//klart
+async function deleteCat(id) {
+    let sql = `DELETE FROM cat_profiles WHERE tag_id = ?`;
+    await db.query(sql, [id]);
+}
+//klart
+async function deleteUser(id) {
+    let sql = `DELETE FROM app_users WHERE id = ?`;
+    await db.query(sql, [id]);
+}
+//klart
+async function registerUser(username, pass) {
+    let sql = `INSERT INTO app_users(id, username, password)
+               VALUES
+               (?, ?, ?);
+               `;
+    await db.query(sql, [null, username, pass]);
+}
+//klart
+async function login(username, pass) {
+    let result;
+    let sql = `SELECT * FROM app_users WHERE username = ? AND password = ? `;
+    let temp = await db.query(sql, [username, pass]);
+
+    if (temp.length === 0) {
+        result = "User or password is wrong.";
+    } else {
+        result = "Logged in as " + temp[0].username;
+    }
+
+    return result;
 }

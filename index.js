@@ -10,16 +10,14 @@ const express = require("express");
 const app     = express();
 const routeIndex = require("./route/index.js");
 const middleware = require("./middleware/index.js");
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 app.set("view engine", "ejs");
-
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(middleware.logIncomingToConsole);
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", routeIndex);
 app.listen(port, logStartUpDetailsToConsole);
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
 
 function logStartUpDetailsToConsole() {

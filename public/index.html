@@ -27,22 +27,23 @@
             <div class="article">
                 <h1>API Documentation</h1>
                 <article id="intro" class="article">
-                    How to use
                     <div class="codefield">
-                        <!-- <code>.vertical-menu a:hover {
-                            color: rgb(19, 176, 223);
-                        }</code> -->
+                        This is an API-created for supporting an applikation for tracking cats. It is built in node.js and express
+                        and hosted on a debian server.
                     </div>
                 </article>
                 <article id="api-key" class="article">
                     <h1>API-keys</h1>
                     <h3>Verify API-key</h3>
                     <div class="routefield">
-                        <code>GET /verify_key?key=[API_KEY]</code>
+                        GET /verify_key?key=[API_KEY]
                     </div>
                     <h4>Result</h4>
                     <div class="codefield">
-                        <code>"key exist as verified."</code>
+                        <code><pre>
+{
+    "message": "Key is registered as valid API-key"
+}</pre></code>
                     </div>
                 </article>
                 <article id="get" class="article">
@@ -50,46 +51,50 @@
                     <h3>GET all cats</h3>
                     <div class="routefield">GET /cats?=[API_KEY]</div>
                     <h4>Result</h4>
-                    <pre class="codefield">
-{
-  "data": [
+<pre class="codefield">
     {
-      "tag_id": 12,
-      "name": "Tiger",
-      "home_group": "home 2",
-      "is_chipped": "no",
-      "owner": "Lars Persson",
-      "home": "Dragongatan 3B, 379 40 Karlskrona",
-      "gps": "56.164115,15.585870"
-    },
-    {
-      "tag_id": 15,
-      "name": "Luna",
-      "home_group": "Almas katter",
-      "is_chipped": "yes",
-      "owner": "Alma Holm",
-      "home": "Drottninggatan 57, 335 80 Karlskrona",
-      "gps": "56.164450, 15.567168"
-    },
-    {
-      "tag_id": 20,
-      "name": "Nugget",
-      "home_group": "Almas katter",
-      "is_chipped": "yes",
-      "owner": "Alma Holm",
-      "home": "Drottninggatan 57, 335 80 Karlskrona",
-      "gps": "52.163470, 11.547190"
-    },
-    {
-      "tag_id": 56,
-      "name": "Maja",
-      "home_group": "hemlÃ¶sa",
-      "is_chipped": "yes",
-      "owner": "Katthemmet",
-      "home": "RingvÃ¤gen 8, 378 90 MalmÃ¶",
-      "gps": "55.162460, 18.547241"
-    }
-  ]
+      "data": [
+        {
+          "tag_id": 12,
+          "owner_id": 2,
+          "name": "Tiger",
+          "home_group": "home 2",
+          "is_chipped": "no",
+          "owner": "Lars Persson",
+          "home": "Dragongatan 3B, 379 40 Karlskrona",
+          "gps": "56.164115,15.585870"
+        },
+        {
+          "tag_id": 15,
+          "owner_id": 1,
+          "name": "Luna",
+          "home_group": "Almas katter",
+          "is_chipped": "yes",
+          "owner": "Alma Holm",
+          "home": "Drottninggatan 57, 335 80 Karlskrona",
+          "gps": "56.164450, 15.567168"
+        },
+        {
+          "tag_id": 20,
+          "owner_id": 1,
+          "name": "Nugget",
+          "home_group": "Almas katter",
+          "is_chipped": "yes",
+          "owner": "Alma Holm",
+          "home": "Drottninggatan 57, 335 80 Karlskrona",
+          "gps": "56.164450, 15.27190"
+        },
+        {
+          "tag_id": 56,
+          "owner_id": 3,
+          "name": "Maja",
+          "home_group": "hemlösa",
+          "is_chipped": "yes",
+          "owner": "Katthemmet",
+          "home": "Ringvägen 8, 378 90 Malmö",
+          "gps": "55.162460, 18.547241"
+        }
+      ]
 }</pre>
                     <h3>GET specific cat</h3>
                     <div class="routefield">GET /cat/:tag_id?api_key=[API_KEY]</div>
@@ -99,6 +104,7 @@
   "data": [
     {
       "tag_id": 12,
+      "owner_id": 2,
       "name": "Tiger",
       "home_group": "home 2",
       "is_chipped": "no",
@@ -109,6 +115,64 @@
   ]
 }
                     </pre>
+                    <h3>POST Register Cat</h3>
+                    <div class="routefield">POST /cat?api_key=[API_KEY]</div>
+                    <h4>Parameters</h4>
+                    <pre class="codefield">
+tag_id
+owner_id
+name
+home_group
+is_chipped
+owner
+home
+                    </pre>
+                    <h3>DELETE cat</h3>
+                    <div class="routefield">DELETE  /cat?api_key=[API_KEY]</div>
+                    <h4>Parameters</h4>
+                    <pre class="codefield">
+tag_id
+                    </pre>
+                    <h4>Errors</h4>
+                    <pre class="codefield">
+}
+    "Error": {
+        "failed": "Cannot delete cat.",
+        "message": "Entry does not exists."
+    }
+}                    </pre>
+                    <h1>Users</h1>
+                    <h3>Register user</h3>
+                    <div class="routefield">POST  /users?api_key=[API_KEY]</div>
+                    <h4>Parameters</h4>
+                    <pre class="codefield">
+username
+password
+                    </pre>
+                    <h3>Deleter user</h3>
+                    <div class="routefield">DELETE /users?api_key=[API_KEY]</div>
+                    <h4>Parameters</h4>
+                    <pre class="codefield">
+id
+                    </pre>
+                    <h1>Login</h1>
+                    <h3>Check Login</h3>
+                    <div class="routefield">POST  /login?api_key=[API_KEY]</div>
+                    <h4>Parameters</h4>
+                    <pre class="codefield">
+username
+password
+                    </pre>
+                    <h4>Errors</h4>
+                    <pre class="codefield">
+{
+    "message": "User or password is wrong."
+}                   </pre>
+                    <h4>Success</h4>
+                    <pre class="codefield">
+{
+    "message": "Logged in as [username]"
+}                </pre>
                 </article>
             </div>
         </div>

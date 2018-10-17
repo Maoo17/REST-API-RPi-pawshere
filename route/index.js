@@ -4,10 +4,9 @@
 "use strict";
 
 const express = require("express");
-const router  = express.Router();
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
+const router  = express.Router();
 const paws = require("../src/paws.js");
 
 const Routefunctions = require("../src/class/Routefunctions.js");
@@ -32,7 +31,7 @@ router.get("/verify_key", async (req, res) => {
     } else {
         text = "Key does not exists.";
         if (result === true) {
-            text = "Key exist as a verified key.";
+            res.json({message: "Key is registered as valid API-key"});
         }
     }
 
@@ -51,7 +50,7 @@ router.get("/cats", async (req, res) => {
             let data = await paws.getAllCats();
             res.write(func.mapToJson(data));
         } else {
-            res.write("does not exist.");
+            res.json({message: "Key does not exist."});
         }
     }
     res.end();
@@ -63,7 +62,7 @@ router.get("/cat/:tag_id", async (req, res) => {
     let result = await paws.checkForKey(key);
 
     if (typeof key == 'undefined') {
-        res.write("Wrong type of argument in query.");
+        res.json({message: "Wrong type of argument in query."});
     } else {
         if (result === true) {
             let data = await paws.getSpecificCat(tag);
@@ -77,28 +76,96 @@ router.get("/cat/:tag_id", async (req, res) => {
 
 router.post("/cats", async (req, res) => {
     let id = req.body.tag_id;
+    let oi = req.body.owner_id;
     let name = req.body.name;
     let hg = req.body.home_group;
     let chip = req.body.is_chipped;
     let owner = req.body.owner;
     let home = req.body.home;
-    let gps = req.body.gps;
+    let gps = null;
 
-    console.log(id);
+    let key = req.query.api_key;
+    let result = await paws.checkForDuplicateId(id);
 
+    if (typeof key == 'undefined') {
+        res.json({message: "Wrong type of argument in query."});
+    } else {
+        if (result === false) {
+            await paws.registerCat(id, oi, name, hg, chip, owner, home, gps);
+        } else {
+            res.json(func.formatError("Cannot use duplicate entry for id.", "Entry aldready exists."));
+        }
+    }
+
+    res.end();
+});
+
+router.delete("/cats", async (req, res) => {
+    let id = req.body.tag_id;
+
+    let key = req.query.api_key;
+    let result = await paws.checkForDuplicateId(id);
+
+    if (typeof key == 'undefined') {
+        res.json({message: "Wrong type of argument in query."});
+    } else {
+        if (result === true) {
+            await paws.deleteCat(id);
+        } else {
+            res.json(func.formatError("Cannot delete cat.", "Entry does not exists."));
+        }
+    }
+
+    res.end();
+});
+
+router.delete("/users", async (req, res) => {
+    let id = req.body.id;
+    let key = req.query.api_key;
+
+    if (typeof key == 'undefined') {
+        res.json({message: "Wrong type of argument in query."});
+    } else {
+        await paws.deleteUser(id);
+    }
+
+    res.end();
+});
+
+router.post("/users", async (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let key = req.query.api_key;
+
+    if (typeof key == 'undefined') {
+        res.json({message: "Wrong type of argument in query."});
+    } else {
+        await paws.registerUser(username, password);
+    }
+
+    res.end();
+});
+
+router.post("/login", async (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    let key = req.query.api_key;
     let result = await paws.checkForKey(key);
 
     if (typeof key == 'undefined') {
-        res.write("Wrong type of argument in query.");
+        res.json({message: "Wrong type of argument in query."});
     } else {
         if (result === true) {
-            await paws.registerCat(id, name, hg, chip, owner, home, gps);
-            res.json({message: "cat registered successfully"});
+            let loginres = await paws.login(username, password);
+            res.json({message: loginres});
         } else {
-            res.write("does not exist.");
+            res.json({message: "API-key is not valid."});
         }
     }
+
     res.end();
 });
+
 
 module.exports = router;

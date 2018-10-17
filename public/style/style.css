@@ -22,6 +22,15 @@ nav {
     min-height: 37.5em;
 }
 
+h1 {
+    font-size: 2.5em;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -66,12 +75,12 @@ nav {
 .codefield {
     background-color: rgb(177, 182, 235);
     border-left: 6px solid rgb(23, 140, 152);
-    padding: 3%;
+    padding: 2%;
     margin-top: 0.5em;
     margin-right: 5%;
     min-height: 3em;
     color: black;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 .routefield {

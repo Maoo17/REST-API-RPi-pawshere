@@ -22,8 +22,10 @@ class Routefunctions {
         return JSON.stringify(obj, null, 2);
     }
 
-    test() {
-        console.log("wokring");
+    formatError(fail, message) {
+
+        var obj = {"Error": { "failed": fail, "message": message}};
+        return obj;
     }
 };
 module.exports = Routefunctions;
