@@ -75,6 +75,9 @@ router.get("/cat/:tag_id", async (req, res) => {
 });
 
 router.post("/cats", async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     let id = req.body.tag_id;
     let oi = req.body.owner_id;
     let name = req.body.name;
@@ -89,12 +92,12 @@ router.post("/cats", async (req, res) => {
     console.log(name);
 
     let key = req.query.api_key;
-    let result = await paws.checkForDuplicateId(id);
+    let result = await paws.checkForKey(key);
 
     if (typeof key == 'undefined') {
         res.json({message: "Wrong type of argument in query."});
     } else {
-        if (result === false) {
+        if (result === true) {
             await paws.registerCat(id, oi, name, hg, chip, owner, home, gps);
         } else {
             res.json(func.formatError("Cannot use duplicate entry for id.", "Entry aldready exists."));
@@ -137,6 +140,8 @@ router.delete("/users", async (req, res) => {
 });
 
 router.post("/users", async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     let username = req.body.username;
     let password = req.body.password;
     let key = req.query.api_key;
@@ -151,6 +156,8 @@ router.post("/users", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     let username = req.body.username;
     let password = req.body.password;
 
