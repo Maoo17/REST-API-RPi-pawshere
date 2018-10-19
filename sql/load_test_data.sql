@@ -18,8 +18,8 @@ VALUES
         "kitten.jpg"),
     (1, 15, "Luna", "Almas katter", "yes", "Alma Holm", "Drottninggatan 57, 335 80 Karlskrona", "56.164450, 15.567168",
         "56.16592436266622,15.56661766127695|56.167119085229984,15.565688498497593|56.16874384827277,15.56441601296433|56.171371995892116,15.565074717921789", "kitten2.jpg"),
-    (1, 20, "Nugget", "Almas katter", "yes", "Alma Holm", "Drottninggatan 57, 335 80 Karlskrona", "56.164450, 15.27190", "", "kitten3.jpg"),
-    (3, 56, "Maja", "hemlösa", "yes", "Katthemmet", "Ringvägen 8, 378 90 Malmö", "55.162460, 18.547241", "", "kitten.jpg");
+    (1, 20, "Nugget", "Almas katter", "yes", "Alma Holm", "Drottninggatan 57, 335 80 Karlskrona", "56.164450, 15.27190", "0,0", "kitten3.jpg"),
+    (3, 56, "Maja", "hemlösa", "yes", "Katthemmet", "Ringvägen 8, 378 90 Malmö", "55.162460, 18.547241", "0,0", "kitten.jpg");
 
 
 INSERT INTO api_users
