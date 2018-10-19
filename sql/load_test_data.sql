@@ -11,7 +11,7 @@ VALUES
     (3, "katthemmet", "testpass3");
 
 INSERT INTO cat_profiles
-    (owner_id, tag_id, name, home_group, is_chipped, owner, home, gps, before, img)
+    (owner_id, tag_id, name, home_group, is_chipped, owner, home, gps, move, img)
 VALUES
     (2, 12, "Tiger", "home 2", "no", "Lars Persson", "Dragongatan 3B, 379 40 Karlskrona", "56.164115,15.585870",
         "56.163111357043455,15.585985780276246|56.162561731930175,15.586730315922182|56.162060006037635,15.588303082386574|56.161582058520594,15.589948840261513|56.16110410505652,15.592839143119363",

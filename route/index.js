@@ -87,7 +87,7 @@ router.post("/cats", async (req, res) => {
     let home = req.body.home;
     let img = req.body.img;
     let gps = null;
-    let bf = null;
+    let mv = null;
 
     let key = req.query.api_key;
     let result = await paws.checkForKey(key);
@@ -96,7 +96,7 @@ router.post("/cats", async (req, res) => {
         res.json({message: "Wrong type of argument in query."});
     } else {
         if (result === true) {
-            await paws.registerCat(id, oi, name, hg, chip, owner, home, gps, bf, img);
+            await paws.registerCat(id, oi, name, hg, chip, owner, home, gps, mv, img);
         } else {
             res.json(func.formatError("Cannot use duplicate entry for id.", "Entry aldready exists."));
         }
