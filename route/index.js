@@ -86,8 +86,8 @@ router.post("/cats", async (req, res) => {
     let owner = req.body.owner;
     let home = req.body.home;
     let img = req.body.img;
-    let gps = null;
-    let mv = null;
+    let gps = "";
+    let mv = "";
 
     let key = req.query.api_key;
     let result = await paws.checkForKey(key);
