@@ -55,12 +55,12 @@ async function getSpecificCat(tag) {
     return res;
 }
 //klart
-async function registerCat(id, oi, name, hg, chip, owner, home, gps, img) {
-    let sql = `INSERT INTO cat_profiles(tag_id, owner_id, name, home_group, is_chipped, owner, home, gps, img)
+async function registerCat(id, oi, name, hg, chip, owner, home, gps, bf, img) {
+    let sql = `INSERT INTO cat_profiles(tag_id, owner_id, name, home_group, is_chipped, owner, home, gps, before, img)
                VALUES
-               (?, ?, ?, ?, ?, ?, ?, ?, ?);
+               (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                `;
-    await db.query(sql, [id, oi, name, hg, chip, owner, home, gps, img]);
+    await db.query(sql, [id, oi, name, hg, chip, owner, home, gps, bf, img]);
 }
 //klart
 async function checkForDuplicateId(id) {
