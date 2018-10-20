@@ -13,14 +13,14 @@ const routeIndex = require("./route/index.js");
 const middleware = require("./middleware/index.js");
 const bodyParser = require('body-parser');
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "http://localhost, *");
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost, http://localhost:8200");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
-app.use(cors());
+// app.use(cors());
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
