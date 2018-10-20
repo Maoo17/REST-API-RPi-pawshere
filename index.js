@@ -14,9 +14,10 @@ const middleware = require("./middleware/index.js");
 const bodyParser = require('body-parser');
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost, http://localhost:8200");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.Header('Access-Control-Allow-Credentials', true);
     next();
 });
 
