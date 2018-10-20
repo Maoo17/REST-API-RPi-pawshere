@@ -40,7 +40,6 @@ router.get("/verify_key", async (req, res) => {
 });
 
 router.get("/cats", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     let key = req.query.api_key;
     let result = await paws.checkForKey(key);
 
@@ -58,7 +57,6 @@ router.get("/cats", async (req, res) => {
 });
 
 router.get("/cat/:tag_id", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     let key = req.query.api_key;
     let tag = req.params.tag_id;
     let result = await paws.checkForKey(key);
@@ -108,7 +106,6 @@ router.post("/cats", async (req, res) => {
 });
 
 router.delete("/cats", async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     let id = req.body.tag_id;
 
     let key = req.query.api_key;
